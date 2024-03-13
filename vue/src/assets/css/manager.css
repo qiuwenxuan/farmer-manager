@@ -1,6 +1,7 @@
 .manager-container {
     background-color: #f8f8ff;
     min-height: 100vh;
+
 }
 
 .manager-header {
@@ -17,8 +18,9 @@
 }
 
 .manager-header-left img {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
 }
 
 .manager-header-left .title {
