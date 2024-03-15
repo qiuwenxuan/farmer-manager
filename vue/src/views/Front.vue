@@ -5,15 +5,15 @@
     <div class="front-header">
       <div class="front-header-left">
         <img src="../assets/imgs/logo.png" alt="">
-        <div class="title">项目前台</div>
+        <div class="title" @click="navTo('/front/home')">中国助农扶贫网</div>
       </div>
       <div class="front-header-center">
-<!--        <div class="front-header-nav">-->
-<!--          <el-menu :default-active="$route.path" mode="horizontal" router>-->
-<!--            <el-menu-item index="/front/home">首页</el-menu-item>-->
-<!--            <el-menu-item index="/front/person">个人中心</el-menu-item>-->
-<!--          </el-menu>-->
-<!--        </div>-->
+        <!--        <div class="front-header-nav">-->
+        <!--          <el-menu :default-active="$route.path" mode="horizontal" router>-->
+        <!--            <el-menu-item index="/front/home">首页</el-menu-item>-->
+        <!--            <el-menu-item index="/front/person">个人中心</el-menu-item>-->
+        <!--          </el-menu>-->
+        <!--        </div>-->
       </div>
       <div class="front-header-right">
         <div v-if="!user.username">
