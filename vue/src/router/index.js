@@ -43,6 +43,12 @@ const routes = [
                 meta: {name: '公告信息'},
                 component: () => import('../views/manager/Notice')
             },
+            {
+                path: 'information',
+                name: 'Information',
+                meta: {name: '扶贫资讯'},
+                component: () => import('../views/manager/Information')
+            },
         ]
     },
     {
