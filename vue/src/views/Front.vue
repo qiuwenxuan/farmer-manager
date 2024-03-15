@@ -8,12 +8,12 @@
         <div class="title">项目前台</div>
       </div>
       <div class="front-header-center">
-        <div class="front-header-nav">
-          <el-menu :default-active="$route.path" mode="horizontal" router>
-						<el-menu-item index="/front/home">首页</el-menu-item>
-						<el-menu-item index="/front/person">个人中心</el-menu-item>
-          </el-menu>
-        </div>
+<!--        <div class="front-header-nav">-->
+<!--          <el-menu :default-active="$route.path" mode="horizontal" router>-->
+<!--            <el-menu-item index="/front/home">首页</el-menu-item>-->
+<!--            <el-menu-item index="/front/person">个人中心</el-menu-item>-->
+<!--          </el-menu>-->
+<!--        </div>-->
       </div>
       <div class="front-header-right">
         <div v-if="!user.username">
@@ -30,6 +30,9 @@
             </div>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
+                <div style="text-decoration: none" @click="navTo('/front/person')">个人中心</div>
+              </el-dropdown-item>
+              <el-dropdown-item>
                 <div style="text-decoration: none" @click="logout">退出</div>
               </el-dropdown-item>
             </el-dropdown-menu>
@@ -39,7 +42,7 @@
     </div>
     <!--主体-->
     <div class="main-body">
-      <router-view ref="child" @update:user="updateUser" />
+      <router-view ref="child" @update:user="updateUser"/>
     </div>
   </div>
 
@@ -50,7 +53,7 @@
 export default {
   name: "FrontLayout",
 
-  data () {
+  data() {
     return {
       top: '',
       notice: [],
@@ -86,11 +89,13 @@ export default {
       localStorage.removeItem("xm-user");
       this.$router.push("/login");
     },
+    navTo(url) {
+      location.href = url
+    }
   }
-
 }
 </script>
 
 <style scoped>
-  @import "@/assets/css/front.css";
+@import "@/assets/css/front.css";
 </style>

@@ -8,6 +8,7 @@ import com.example.common.Constants;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
 import com.example.service.AdminService;
+import com.example.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -28,13 +29,17 @@ public class TokenUtils {
     private static final Logger log = LoggerFactory.getLogger(TokenUtils.class);
 
     private static AdminService staticAdminService;
+    private static UserService staticUserService;
 
     @Resource
     AdminService adminService;
+    @Resource
+    UserService userService;
 
     @PostConstruct
     public void setUserService() {
         staticAdminService = adminService;
+        staticUserService = userService;
     }
 
     /**
@@ -55,16 +60,25 @@ public class TokenUtils {
             String token = request.getHeader(Constants.TOKEN);
             if (ObjectUtil.isNotEmpty(token)) {
                 String userRole = JWT.decode(token).getAudience().get(0);
-                String userId = userRole.split("-")[0];  // 获取用户id
-                String role = userRole.split("-")[1];    // 获取角色
+                // 获取用户id
+                String userId = userRole.split("-")[0];
+                // 获取角色
+                String role = userRole.split("-")[1];
+
+                // 根据角色类型执行不同的查询操作
                 if (RoleEnum.ADMIN.name().equals(role)) {
                     return staticAdminService.selectById(Integer.valueOf(userId));
                 }
+                if (RoleEnum.USER.name().equals(role)) {
+                    return staticUserService.selectById(Integer.valueOf(userId));
+                }
+
             }
         } catch (Exception e) {
             log.error("获取当前用户信息出错", e);
         }
-        return new Account();  // 返回空的账号对象
+        // 返回空的账号对象
+        return new Account();
     }
 }
 

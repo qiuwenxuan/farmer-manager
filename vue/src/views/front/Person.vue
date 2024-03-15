@@ -12,7 +12,7 @@
               :show-file-list="false"
               :on-success="handleAvatarSuccess"
           >
-            <img v-if="user.avatar" :src="user.avatar" class="avatar" />
+            <img v-if="user.avatar" :src="user.avatar" class="avatar"/>
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </div>
@@ -28,12 +28,17 @@
         <el-form-item label="邮箱" prop="email">
           <el-input v-model="user.email" placeholder="邮箱"></el-input>
         </el-form-item>
+        <!--        添加个人中心“余额”一栏，将其改为disable不可更改状态-->
+        <el-form-item label="余额" prop="account">
+          <el-input v-model="user.account" placeholder="余额" disabled></el-input>
+        </el-form-item>
         <div style="text-align: center; margin-bottom: 20px">
           <el-button type="primary" @click="update">保 存</el-button>
         </div>
       </el-form>
     </el-card>
-    <el-dialog title="修改密码" :visible.sync="dialogVisible" width="30%" :close-on-click-modal="false" destroy-on-close>
+    <el-dialog title="修改密码" :visible.sync="dialogVisible" width="30%" :close-on-click-modal="false"
+               destroy-on-close>
       <el-form :model="user" label-width="80px" style="padding-right: 20px" :rules="rules" ref="formRef">
         <el-form-item label="原始密码" prop="password">
           <el-input show-password v-model="user.password" placeholder="原始密码"></el-input>
@@ -71,13 +76,13 @@ export default {
 
       rules: {
         password: [
-          { required: true, message: '请输入原始密码', trigger: 'blur' },
+          {required: true, message: '请输入原始密码', trigger: 'blur'},
         ],
         newPassword: [
-          { required: true, message: '请输入新密码', trigger: 'blur' },
+          {required: true, message: '请输入新密码', trigger: 'blur'},
         ],
         confirmPassword: [
-          { validator: validatePassword, required: true, trigger: 'blur' },
+          {validator: validatePassword, required: true, trigger: 'blur'},
         ],
       }
     }
@@ -88,7 +93,7 @@ export default {
   methods: {
     update() {
       // 保存当前的用户信息到数据库
-      this.$request.put('/admin/update', this.user).then(res => {
+      this.$request.put('/user/update', this.user).then(res => {
         if (res.code === '200') {
           // 成功更新
           this.$message.success('保存成功')
@@ -130,22 +135,26 @@ export default {
 </script>
 
 <style scoped>
-/deep/.el-form-item__label {
+/deep/ .el-form-item__label {
   font-weight: bold;
 }
-/deep/.el-upload {
+
+/deep/ .el-upload {
   border-radius: 50%;
 }
-/deep/.avatar-uploader .el-upload {
+
+/deep/ .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   cursor: pointer;
   position: relative;
   overflow: hidden;
   border-radius: 50%;
 }
-/deep/.avatar-uploader .el-upload:hover {
+
+/deep/ .avatar-uploader .el-upload:hover {
   border-color: #409EFF;
 }
+
 .avatar-uploader-icon {
   font-size: 28px;
   color: #8c939d;
@@ -155,6 +164,7 @@ export default {
   text-align: center;
   border-radius: 50%;
 }
+
 .avatar {
   width: 120px;
   height: 120px;

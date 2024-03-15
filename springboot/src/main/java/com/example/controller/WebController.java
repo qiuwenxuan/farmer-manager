@@ -7,6 +7,7 @@ import com.example.common.enums.ResultCodeEnum;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
 import com.example.service.AdminService;
+import com.example.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,6 +20,9 @@ public class WebController {
 
     @Resource
     private AdminService adminService;
+
+    @Resource
+    private UserService userService;
 
     @GetMapping("/")
     public Result hello() {
@@ -34,9 +38,17 @@ public class WebController {
                 || ObjectUtil.isEmpty(account.getRole())) {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
         }
+
+        //如果登录时角色为“管理员”,走Admin登录逻辑
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
             account = adminService.login(account);
         }
+
+        //如果登录时角色为“用户”，走User登录逻辑
+        if (RoleEnum.USER.name().equals(account.getRole())) {
+            account = userService.login(account);
+        }
+
         return Result.success(account);
     }
 
@@ -49,9 +61,7 @@ public class WebController {
                 || ObjectUtil.isEmpty(account.getRole())) {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
         }
-        if (RoleEnum.ADMIN.name().equals(account.getRole())) {
-            adminService.register(account);
-        }
+        userService.register(account);
         return Result.success();
     }
 
@@ -66,6 +76,9 @@ public class WebController {
         }
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
             adminService.updatePassword(account);
+        }
+        if (RoleEnum.USER.name().equals(account.getRole())) {
+            userService.updatePassword(account);
         }
         return Result.success();
     }

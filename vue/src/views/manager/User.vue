@@ -27,6 +27,8 @@
         <el-table-column prop="name" label="姓名"></el-table-column>
         <el-table-column prop="phone" label="电话"></el-table-column>
         <el-table-column prop="email" label="邮箱"></el-table-column>
+        <el-table-column prop="email" label="身份"></el-table-column>
+        <el-table-column prop="email" label="余额"></el-table-column>
         <el-table-column prop="role" label="角色"></el-table-column>
         <el-table-column label="操作" align="center" width="180">
           <template v-slot="scope">
@@ -75,6 +77,12 @@
         <el-form-item label="邮箱" prop="email">
           <el-input v-model="form.email" placeholder="邮箱"></el-input>
         </el-form-item>
+        <el-form-item label="身份" prop="level">
+          <el-select v-model="form.level" placeholder="请选择" style="width: 100%">
+            <el-option label="普通户" value="普通户"></el-option>
+            <el-option label="贫困户" value="贫困户"></el-option>
+          </el-select>
+        </el-form-item>
       </el-form>
 
       <div slot="footer" class="dialog-footer">
@@ -89,7 +97,7 @@
 
 <script>
 export default {
-  name: "Admin",
+  name: "User",
   data() {
     return {
       tableData: [],  // 所有的数据
@@ -124,7 +132,7 @@ export default {
       this.$refs.formRef.validate((valid) => {
         if (valid) {
           this.$request({
-            url: this.form.id ? '/admin/update' : '/admin/add',
+            url: this.form.id ? '/user/update' : '/user/add',
             method: this.form.id ? 'PUT' : 'POST',
             data: this.form
           }).then(res => {
@@ -141,7 +149,7 @@ export default {
     },
     del(id) {   // 单个删除
       this.$confirm('您确定删除吗？', '确认删除', {type: "warning"}).then(response => {
-        this.$request.delete('/admin/delete/' + id).then(res => {
+        this.$request.delete('/user/delete/' + id).then(res => {
           if (res.code === '200') {   // 表示操作成功
             this.$message.success('操作成功')
             this.load(1)
@@ -161,7 +169,7 @@ export default {
         return
       }
       this.$confirm('您确定批量删除这些数据吗？', '确认删除', {type: "warning"}).then(response => {
-        this.$request.delete('/admin/delete/batch', {data: this.ids}).then(res => {
+        this.$request.delete('/user/delete/batch', {data: this.ids}).then(res => {
           if (res.code === '200') {   // 表示操作成功
             this.$message.success('操作成功')
             this.load(1)

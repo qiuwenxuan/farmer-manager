@@ -11,6 +11,7 @@ import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
 import com.example.exception.CustomException;
 import com.example.service.AdminService;
+import com.example.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -30,6 +31,8 @@ public class JwtInterceptor implements HandlerInterceptor {
 
     @Resource
     private AdminService adminService;
+    @Resource
+    private UserService userService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -49,10 +52,16 @@ public class JwtInterceptor implements HandlerInterceptor {
             String userRole = JWT.decode(token).getAudience().get(0);
             String userId = userRole.split("-")[0];
             String role = userRole.split("-")[1];
-            // 根据userId查询数据库
+
+            // 用户或管理员根据userId查询数据库
             if (RoleEnum.ADMIN.name().equals(role)) {
                 account = adminService.selectById(Integer.valueOf(userId));
             }
+
+            if (RoleEnum.USER.name().equals(role)) {
+                account = userService.selectById(Integer.valueOf(userId));
+            }
+
         } catch (Exception e) {
             throw new CustomException(ResultCodeEnum.TOKEN_CHECK_ERROR);
         }
@@ -62,7 +71,8 @@ public class JwtInterceptor implements HandlerInterceptor {
         try {
             // 用户密码加签验证 token
             JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(account.getPassword())).build();
-            jwtVerifier.verify(token); // 验证token
+            // 验证token
+            jwtVerifier.verify(token);
         } catch (JWTVerificationException e) {
             throw new CustomException(ResultCodeEnum.TOKEN_CHECK_ERROR);
         }
