@@ -63,6 +63,12 @@ const routes = [
                 meta: {name: '个人信息'},
                 component: () => import('../views/front/Person')
             },
+        {
+                path: 'informationDetial',
+                name: 'InformationDetial',
+                meta: {name: '资讯详情'},
+                component: () => import('../views/front/InformationDetial')
+            },
         ]
     },
     {path: '/login', name: 'Login', meta: {name: '登录'}, component: () => import('../views/Login.vue')},

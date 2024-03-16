@@ -1,11 +1,13 @@
 package com.example.mapper;
 
 import com.example.entity.Information;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
 /**
  * 操作information相关数据接口
+ *
  * @author qiuwenxuan
  */
 public interface InformationMapper {
@@ -35,4 +37,9 @@ public interface InformationMapper {
      */
     List<Information> selectAll(Information information);
 
+    /*
+     * 查找扶贫资讯表前6个数据
+     * */
+    @Select("select * from information order by id desc limit 6")
+    List<Information> selectTop6();
 }

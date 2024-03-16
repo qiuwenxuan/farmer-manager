@@ -75,4 +75,7 @@ public class InformationService {
         return PageInfo.of(list);
     }
 
+    public List<Information> top6() {
+        return informationMapper.selectTop6();
+    }
 }

@@ -22,35 +22,19 @@
           <el-tabs v-model="activeName">
             <el-tab-pane label="扶贫咨询" name="first">
               <!--              设置display: flex，将其设为弹性布局容器，及内部的<div>共享容器空间，div1为width: 150px，那么剩余的空间归div2所有-->
-              <div style="display: flex; line-height: 48px; height: 48px">
-                <!--                class="overflowShow"定义了一个css样式，如果字段过长，使用...隐藏超长的字段-->
-                <div style="flex: 1; font-size: 17px; width: 0" class="overflowShow">
-                  【“飞阅”中国】江西安福：让文物活起来 助力乡村振兴
+              <div style="display: flex; line-height: 48px; height: 48px" v-for="item in informationData">
+                <!--                class="overflowShow"定义了一个css样式，如果字段过长，使用...隐藏超长的字段,cursor: pointer表示鼠标点击上去显示小手-->
+                <!--                navTo()为一个跳转函数，后面接需要跳转的路径并传入item.id-->
+                <div style="flex: 1; font-size: 17px; width: 0; cursor: pointer" class="overflowShow"
+                     @click="navTo('/front/informationDetial?id='+item.id)">
+                  {{ item.name }}
                 </div>
-                <div style="width: 150px; text-align: right; color: #a9a9b8; font-size: 15px">2023-12-08</div>
-              </div>
-              <div style="display: flex; line-height: 48px; height: 48px">
-                <div style="flex: 1; font-size: 17px; width: 0" class="overflowShow">
-                  【“飞阅”中国】江西安福：让文物活起来 助力乡村振兴
-                </div>
-                <div style="width: 150px; text-align: right; color: #a9a9b8; font-size: 15px">2023-12-08</div>
-              </div>
-              <div style="display: flex; line-height: 48px; height: 48px">
-                <div style="flex: 1; font-size: 17px; width: 0" class="overflowShow">
-                  【“飞阅”中国】江西安福：让文物活起来 助力乡村振兴
-                </div>
-                <div style="width: 150px; text-align: right; color: #a9a9b8; font-size: 15px">2023-12-08</div>
-              </div>
-              <div style="display: flex; line-height: 48px; height: 48px">
-                <div style="flex: 1; font-size: 17px; width: 0" class="overflowShow">
-                  【“飞阅”中国】江西安福：让文物活起来 助力乡村振兴
-                </div>
-                <div style="width: 150px; text-align: right; color: #a9a9b8; font-size: 15px">2023-12-08</div>
+                <div style="width: 150px; text-align: right; color: #a9a9b8; font-size: 15px">{{ item.time }}</div>
               </div>
             </el-tab-pane>
             <el-tab-pane label="扶贫政策" name="second">
               <div style="display: flex; line-height: 48px; height: 48px">
-                <div style="flex: 1; font-size: 17px; width: 0" class="overflowShow">
+                <div style="flex: 1; font-size: 17px; width: 0; cursor: pointer" class="overflowShow">
                   传承井冈山精神 带领村名过上好日子
                 </div>
                 <div style="width: 150px; text-align: right; color: #a9a9b8; font-size: 15px">2023-12-08</div>
@@ -113,7 +97,7 @@
               <el-button type="warning" size="mini">购买</el-button>
             </div>
           </el-col>
-        <el-col :span="4" style="margin-top: 30px">
+          <el-col :span="4" style="margin-top: 30px">
             <img src="@/assets/imgs/荔枝王.jpg" alt=""
                  style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
             <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
@@ -124,7 +108,7 @@
               <el-button type="warning" size="mini">购买</el-button>
             </div>
           </el-col>
-        <el-col :span="4" style="margin-top: 30px">
+          <el-col :span="4" style="margin-top: 30px">
             <img src="@/assets/imgs/荔枝王.jpg" alt=""
                  style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
             <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
@@ -135,7 +119,7 @@
               <el-button type="warning" size="mini">购买</el-button>
             </div>
           </el-col>
-        <el-col :span="4" style="margin-top: 30px">
+          <el-col :span="4" style="margin-top: 30px">
             <img src="@/assets/imgs/荔枝王.jpg" alt=""
                  style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
             <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
@@ -146,7 +130,7 @@
               <el-button type="warning" size="mini">购买</el-button>
             </div>
           </el-col>
-        <el-col :span="4" style="margin-top: 30px">
+          <el-col :span="4" style="margin-top: 30px">
             <img src="@/assets/imgs/荔枝王.jpg" alt=""
                  style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
             <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
@@ -157,7 +141,7 @@
               <el-button type="warning" size="mini">购买</el-button>
             </div>
           </el-col>
-        <el-col :span="4" style="margin-top: 30px">
+          <el-col :span="4" style="margin-top: 30px">
             <img src="@/assets/imgs/荔枝王.jpg" alt=""
                  style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
             <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
@@ -168,7 +152,7 @@
               <el-button type="warning" size="mini">购买</el-button>
             </div>
           </el-col>
-        <el-col :span="4" style="margin-top: 30px">
+          <el-col :span="4" style="margin-top: 30px">
             <img src="@/assets/imgs/荔枝王.jpg" alt=""
                  style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
             <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
@@ -179,7 +163,7 @@
               <el-button type="warning" size="mini">购买</el-button>
             </div>
           </el-col>
-        <el-col :span="4" style="margin-top: 30px">
+          <el-col :span="4" style="margin-top: 30px">
             <img src="@/assets/imgs/荔枝王.jpg" alt=""
                  style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
             <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
@@ -190,7 +174,7 @@
               <el-button type="warning" size="mini">购买</el-button>
             </div>
           </el-col>
-        <el-col :span="4" style="margin-top: 30px">
+          <el-col :span="4" style="margin-top: 30px">
             <img src="@/assets/imgs/荔枝王.jpg" alt=""
                  style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
             <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
@@ -201,7 +185,7 @@
               <el-button type="warning" size="mini">购买</el-button>
             </div>
           </el-col>
-        <el-col :span="4" style="margin-top: 30px">
+          <el-col :span="4" style="margin-top: 30px">
             <img src="@/assets/imgs/荔枝王.jpg" alt=""
                  style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
             <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
@@ -212,7 +196,7 @@
               <el-button type="warning" size="mini">购买</el-button>
             </div>
           </el-col>
-        <el-col :span="4" style="margin-top: 30px">
+          <el-col :span="4" style="margin-top: 30px">
             <img src="@/assets/imgs/荔枝王.jpg" alt=""
                  style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
             <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
@@ -223,7 +207,7 @@
               <el-button type="warning" size="mini">购买</el-button>
             </div>
           </el-col>
-        <el-col :span="4" style="margin-top: 30px">
+          <el-col :span="4" style="margin-top: 30px">
             <img src="@/assets/imgs/荔枝王.jpg" alt=""
                  style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
             <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
@@ -243,7 +227,14 @@
 
 <script>
 
+import information from "@/views/manager/Information.vue";
+
 export default {
+  computed: {
+    information() {
+      return information
+    }
+  },
 
   data() {
     return {
@@ -256,14 +247,34 @@ export default {
         require('@/assets/imgs/lun-1.png'),
         require('@/assets/imgs/lun-2.png'),
         require('@/assets/imgs/lun-3.png')
-      ]
+      ],
+      activeName: 'first',
+      informationData: []
     }
   },
-  mounted() {
 
+  //mounted是钩子函数，当组件被加载到页面上后自动执行的函数，会调用loadInformation方法，自动将informatio表当中的前6个数据显示在扶贫资讯一栏
+  mounted() {
+    this.loadInformation()
   },
   // methods：本页面所有的点击事件或者其他函数定义区
-  methods: {}
+  methods: {
+    // 加载扶贫咨询表的前6个数据到扶贫咨询一栏
+    loadInformation() {
+      this.$request.get('/information/top6').then(res => {
+        if (res.code === '200') {
+          this.informationData = res.data
+        } else {
+          this.message.error(res.msg)
+        }
+      })
+    },
+
+    // 跳转函数
+    navTo(url) {
+      location.href = url;
+    }
+  }
 }
 </script>
 

@@ -68,8 +68,14 @@ public class InformationController {
      * 查询所有
      */
     @GetMapping("/selectAll")
-    public Result selectAll(Information information ) {
+    public Result selectAll(Information information) {
         List<Information> list = informationService.selectAll(information);
+        return Result.success(list);
+    }
+
+    @GetMapping("/top6")
+    public Result top6() {
+        List<Information> list = informationService.top6();
         return Result.success(list);
     }
 
