@@ -22,7 +22,7 @@ export default {
     let informationId = this.$route.query.id
     return {
       //初始化infrmationId参数，使得外部可以调用该参数
-      infrmationId: informationId,
+      informationId: informationId,
       informationData: {}
     }
   },
@@ -34,7 +34,7 @@ export default {
   methods: {
     loadInformation() {
       // 传入获取到的网址的id查询information数据库信息
-      this.$request.get('/information/selectById/' + this.infrmationId).then(res => {
+      this.$request.get('/information/selectById/' + this.informationId).then(res => {
         if (res.code === '200') {
           this.informationData = res.data
         } else {
@@ -50,8 +50,15 @@ import informationDetial from "./InformationDetial.vue";
 </script>
 
 <style>
+//给p标签等强制加样式，使得页面展示更自然美观
 p {
   color: #3a3c40 !important;
   line-height: 30px !important;
+}
+
+ol {
+  color: #3a3c40 !important;
+  line-height: 30px !important;
+  font-size: 15px !important;
 }
 </style>
