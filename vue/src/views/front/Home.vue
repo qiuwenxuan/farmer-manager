@@ -47,167 +47,21 @@
       <!--      margin 是一个缩写属性，表示按照顺时针顺序设置上、右、下、左四个方向的外边距。当只有两个值时，第一个值表示上下方向的外边距，第二个值表示左右方向的外边距-->
       <div style="text-align: center; color: #19a14b; font-size: 25px; font-weight: 550;margin: 40px 0">魅力农家乐</div>
       <el-row :gutter="20">
-        <el-col :span="8" style="margin-bottom: 50px">
-          <img src="@/assets/imgs/lun-1.png" alt="" style="width: 100%; height: 200px; border-radius: 10px">
-          <div style="text-align: center; font-size: 16px; font-weight: 530; margin-top: 10px">
-            江苏省苏州市【田园绿洲】
-          </div>
-        </el-col>
-        <el-col :span="8" style="margin-bottom: 50px">
-          <img src="@/assets/imgs/lun-1.png" alt="" style="width: 100%; height: 200px; border-radius: 10px">
-          <div style="text-align: center; font-size: 16px; font-weight: 530; margin-top: 10px">
-            江苏省苏州市【田园绿洲】
-          </div>
-        </el-col>
-        <el-col :span="8" style="margin-bottom: 50px">
-          <img src="@/assets/imgs/lun-1.png" alt="" style="width: 100%; height: 200px; border-radius: 10px">
-          <div style="text-align: center; font-size: 16px; font-weight: 530; margin-top: 10px">
-            江苏省苏州市【田园绿洲】
-          </div>
-        </el-col>
-        <el-col :span="8" style="margin-bottom: 50px">
-          <img src="@/assets/imgs/lun-1.png" alt="" style="width: 100%; height: 200px; border-radius: 10px">
-          <div style="text-align: center; font-size: 16px; font-weight: 530; margin-top: 10px">
-            江苏省苏州市【田园绿洲】
-          </div>
-        </el-col>
-        <el-col :span="8" style="margin-bottom: 50px">
-          <img src="@/assets/imgs/lun-1.png" alt="" style="width: 100%; height: 200px; border-radius: 10px">
-          <div style="text-align: center; font-size: 16px; font-weight: 530; margin-top: 10px">
-            江苏省苏州市【田园绿洲】
-          </div>
-        </el-col>
-        <el-col :span="8" style="margin-bottom: 50px">
-          <img src="@/assets/imgs/lun-1.png" alt="" style="width: 100%; height: 200px; border-radius: 10px">
-          <div style="text-align: center; font-size: 16px; font-weight: 530; margin-top: 10px">
-            江苏省苏州市【田园绿洲】
+
+        <el-col :span="8" style="margin-bottom: 50px" v-for="item in agritainmentData">
+          <!--          src前面添加的':'表示 Vue.js 中用于属性绑定的语法糖，表示要对该属性进行动态绑定，而不是简单地把字符串当成属性值-->
+          <img :src="item.img" alt="" style="width: 100%; height: 200px; border-radius: 10px; cursor: pointer;"
+               @click="navTo('/front/agritainmentDetial?id='+item.id)">
+          <!--          给农家乐图片和标题绑定跳转路径+id和鼠标手势cursor: pointer-->
+          <div style="text-align: center; font-size: 16px; font-weight: 530; margin-top: 10px; cursor: pointer;"
+               @click="navTo('/front/agritainmentDetial?id='+item.id)">
+            {{ item.name }}
           </div>
         </el-col>
       </el-row>
       <div style="text-align: center; color: #19a14b; font-size: 25px; font-weight: 550">优质农产品</div>
       <div>
         <el-row :gutter="20">
-          <el-col :span="4" style="margin-top: 30px">
-            <img src="@/assets/imgs/荔枝王.jpg" alt=""
-                 style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
-            <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
-              阳光玫瑰
-            </div>
-            <div style="margin-top: 10px">
-              <span style="color: red; margin-right: 30px">￥ 15</span>
-              <el-button type="warning" size="mini">购买</el-button>
-            </div>
-          </el-col>
-          <el-col :span="4" style="margin-top: 30px">
-            <img src="@/assets/imgs/荔枝王.jpg" alt=""
-                 style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
-            <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
-              阳光玫瑰
-            </div>
-            <div style="margin-top: 10px">
-              <span style="color: red; margin-right: 30px">￥ 15</span>
-              <el-button type="warning" size="mini">购买</el-button>
-            </div>
-          </el-col>
-          <el-col :span="4" style="margin-top: 30px">
-            <img src="@/assets/imgs/荔枝王.jpg" alt=""
-                 style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
-            <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
-              阳光玫瑰
-            </div>
-            <div style="margin-top: 10px">
-              <span style="color: red; margin-right: 30px">￥ 15</span>
-              <el-button type="warning" size="mini">购买</el-button>
-            </div>
-          </el-col>
-          <el-col :span="4" style="margin-top: 30px">
-            <img src="@/assets/imgs/荔枝王.jpg" alt=""
-                 style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
-            <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
-              阳光玫瑰
-            </div>
-            <div style="margin-top: 10px">
-              <span style="color: red; margin-right: 30px">￥ 15</span>
-              <el-button type="warning" size="mini">购买</el-button>
-            </div>
-          </el-col>
-          <el-col :span="4" style="margin-top: 30px">
-            <img src="@/assets/imgs/荔枝王.jpg" alt=""
-                 style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
-            <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
-              阳光玫瑰
-            </div>
-            <div style="margin-top: 10px">
-              <span style="color: red; margin-right: 30px">￥ 15</span>
-              <el-button type="warning" size="mini">购买</el-button>
-            </div>
-          </el-col>
-          <el-col :span="4" style="margin-top: 30px">
-            <img src="@/assets/imgs/荔枝王.jpg" alt=""
-                 style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
-            <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
-              阳光玫瑰
-            </div>
-            <div style="margin-top: 10px">
-              <span style="color: red; margin-right: 30px">￥ 15</span>
-              <el-button type="warning" size="mini">购买</el-button>
-            </div>
-          </el-col>
-          <el-col :span="4" style="margin-top: 30px">
-            <img src="@/assets/imgs/荔枝王.jpg" alt=""
-                 style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
-            <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
-              阳光玫瑰
-            </div>
-            <div style="margin-top: 10px">
-              <span style="color: red; margin-right: 30px">￥ 15</span>
-              <el-button type="warning" size="mini">购买</el-button>
-            </div>
-          </el-col>
-          <el-col :span="4" style="margin-top: 30px">
-            <img src="@/assets/imgs/荔枝王.jpg" alt=""
-                 style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
-            <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
-              阳光玫瑰
-            </div>
-            <div style="margin-top: 10px">
-              <span style="color: red; margin-right: 30px">￥ 15</span>
-              <el-button type="warning" size="mini">购买</el-button>
-            </div>
-          </el-col>
-          <el-col :span="4" style="margin-top: 30px">
-            <img src="@/assets/imgs/荔枝王.jpg" alt=""
-                 style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
-            <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
-              阳光玫瑰
-            </div>
-            <div style="margin-top: 10px">
-              <span style="color: red; margin-right: 30px">￥ 15</span>
-              <el-button type="warning" size="mini">购买</el-button>
-            </div>
-          </el-col>
-          <el-col :span="4" style="margin-top: 30px">
-            <img src="@/assets/imgs/荔枝王.jpg" alt=""
-                 style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
-            <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
-              阳光玫瑰
-            </div>
-            <div style="margin-top: 10px">
-              <span style="color: red; margin-right: 30px">￥ 15</span>
-              <el-button type="warning" size="mini">购买</el-button>
-            </div>
-          </el-col>
-          <el-col :span="4" style="margin-top: 30px">
-            <img src="@/assets/imgs/荔枝王.jpg" alt=""
-                 style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
-            <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
-              阳光玫瑰
-            </div>
-            <div style="margin-top: 10px">
-              <span style="color: red; margin-right: 30px">￥ 15</span>
-              <el-button type="warning" size="mini">购买</el-button>
-            </div>
-          </el-col>
           <el-col :span="4" style="margin-top: 30px">
             <img src="@/assets/imgs/荔枝王.jpg" alt=""
                  style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
@@ -251,7 +105,8 @@ export default {
       ],
       activeName: 'first',
       informationData: [],
-      policyData: []
+      policyData: [],
+      agritainmentData: []
     }
   },
 
@@ -259,6 +114,7 @@ export default {
   mounted() {
     this.loadInformation()
     this.loadPolicy()
+    this.loadAgritainment()
   },
   // methods：本页面所有的点击事件或者其他函数定义区
   methods: {
@@ -272,10 +128,21 @@ export default {
         }
       })
     },
+    // 加载扶贫政策表的前6个数据到扶贫政策一栏展示
     loadPolicy() {
       this.$request.get('/policy/top6').then(res => {
         if (res.code === '200') {
           this.policyData = res.data
+        } else {
+          this.message.error(res.msg)
+        }
+      })
+    },
+    // 加载农家乐信息表的前6个数据到农家乐信息一栏展示
+    loadAgritainment() {
+      this.$request.get('/agritainment/top6').then(res => {
+        if (res.code === '200') {
+          this.agritainmentData = res.data
         } else {
           this.message.error(res.msg)
         }
