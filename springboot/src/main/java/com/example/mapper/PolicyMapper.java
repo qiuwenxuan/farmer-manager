@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @Author Wenxuan.qiu
  * @Date 2024/3/16 18:09
- * @Description 操作information相关数据接口
+ * @Description 操作Policy扶农政策表相关数据接口
  */
 public interface PolicyMapper {
     /*
