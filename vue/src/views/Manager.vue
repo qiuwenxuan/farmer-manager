@@ -3,7 +3,7 @@
     <!--  头部  -->
     <div class="manager-header">
       <div class="manager-header-left">
-        <img src="../assets/imgs/logo.png" />
+        <img src="../assets/imgs/logo.png"/>
         <div class="title">中国助农扶贫网</div>
       </div>
 
@@ -17,8 +17,8 @@
       <div class="manager-header-right">
         <el-dropdown placement="bottom">
           <div class="avatar">
-            <img :src="user.avatar || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'" />
-            <div>{{ user.name ||  '管理员' }}</div>
+            <img :src="user.avatar || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'"/>
+            <div>{{ user.name || '管理员' }}</div>
           </div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="goToPerson">个人信息</el-dropdown-item>
@@ -45,6 +45,7 @@
             <el-menu-item index="/notice">公告信息</el-menu-item>
             <el-menu-item index="/information">扶贫资讯</el-menu-item>
             <el-menu-item index="/policy">扶贫政策</el-menu-item>
+            <el-menu-item index="/agritainment">农家乐信息</el-menu-item>
           </el-submenu>
 
           <el-submenu index="user">
@@ -59,7 +60,7 @@
 
       <!--  数据表格  -->
       <div class="manager-main-right">
-        <router-view @update:user="updateUser" />
+        <router-view @update:user="updateUser"/>
       </div>
     </div>
 

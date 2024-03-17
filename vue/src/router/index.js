@@ -55,6 +55,12 @@ const routes = [
                 meta: {name: '扶贫政策'},
                 component: () => import('../views/manager/Policy')
             },
+        {
+                path: 'agritainment',
+                name: 'Agritainment',
+                meta: {name: '农家乐信息'},
+                component: () => import('../views/manager/Agritainment')
+            },
         ]
     },
     {
