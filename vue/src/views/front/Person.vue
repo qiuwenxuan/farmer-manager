@@ -3,6 +3,7 @@
     <el-card style="width: 50%; margin: 30px auto">
       <div style="text-align: right; margin-bottom: 20px">
         <el-button type="primary" @click="updatePassword">修改密码</el-button>
+        <el-button type="warning" @click="rechargeInit">充 值</el-button>
       </div>
       <el-form :model="user" label-width="80px" style="padding-right: 20px">
         <div style="margin: 15px; text-align: center">
@@ -55,6 +56,23 @@
         <el-button type="primary" @click="save">确 定</el-button>
       </div>
     </el-dialog>
+    <!--    充值窗口-->
+    <el-dialog title="充值信息" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
+      <el-form label-width="100px" style="padding-right: 50px">
+        <el-form-item prop="account" label="充值金额">
+          <el-input v-model="account" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item prop="type" label="支付方式">
+          <!--          支付方式为一个单选框-->
+          <el-radio v-model="type" label="微信">微信</el-radio>
+          <el-radio v-model="type" label="支付宝">支付宝</el-radio>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="fromVisible = false">取 消</el-button>
+        <el-button type="primary" @click="recharge">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -71,9 +89,18 @@ export default {
       }
     }
     return {
+      // 获取浏览器的本地存储的名为xm-user的数据并解析为JavaScript对象user
+      //  1、JSON.parse(...) 用于将获取到的数据解析为 JavaScript 对象。
+      //  2、|| '{}' 表示如果从本地存储中获取的数据为 null 或 undefined，则使用空对象 {} 作为默认值，避免解析错误。
       user: JSON.parse(localStorage.getItem('xm-user') || '{}'),
+      // 小窗口的控制开关
       dialogVisible: false,
-
+      // 充值小窗口
+      fromVisible: false,
+      // 支付金额
+      account: null,
+      // 默认支付方式
+      type: "支付宝",
       rules: {
         password: [
           {required: true, message: '请输入原始密码', trigger: 'blur'},
@@ -91,6 +118,32 @@ export default {
 
   },
   methods: {
+    // 充值
+    recharge() {
+      // 首先更新账户余额为原本的account+充值的account
+      this.user.account = parseFloat(this.user.account) + parseFloat(this.account)
+      // 调用user的update接口更新余额
+      this.$request.put('/user/update', this.user).then(res => {
+        if (res.code === '200') {
+          this.$message.success('充值成功')
+          /*这里需要注意的一点，account金额正确更新在数据库中且页面显示正确，但刷新之后页面account数据又变回去了。
+          原因是页面上的account是登录时候的初始值，虽然更新了数据库但是页面数据未能同步*/
+          // 方法一、及时同步数据库上的数据
+          // 方法二、写一个函数getByUserId()将数据库真实的数据拿到并更新到界面
+          localStorage.setItem("xm-user", JSON.stringify(this.user))
+          // 关闭充值窗口
+          this.fromVisible = false
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
+    },
+    // 初始化充值窗口
+    rechargeInit() {
+      // 默认支付金额为100
+      this.account = 100;
+      this.fromVisible = true
+    },
     update() {
       // 保存当前的用户信息到数据库
       this.$request.put('/user/update', this.user).then(res => {
