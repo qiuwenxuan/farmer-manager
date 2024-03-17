@@ -57,7 +57,7 @@
     <el-dialog title="农家乐信息" :visible.sync="fromVisible" width="60%" :close-on-click-modal="false"
                destroy-on-close>
       <el-form label-width="100px" style="padding-right: 50px" :model="form" :rules="rules" ref="formRef">
-        <el-form-item label="农家乐主图">
+        <el-form-item label="农家乐图片">
           <el-upload
               class="img-uploader"
               :action="$baseUrl + '/files/upload'"

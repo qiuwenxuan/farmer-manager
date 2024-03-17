@@ -62,14 +62,14 @@
       <div style="text-align: center; color: #19a14b; font-size: 25px; font-weight: 550">优质农产品</div>
       <div>
         <el-row :gutter="20">
-          <el-col :span="4" style="margin-top: 30px">
-            <img src="@/assets/imgs/荔枝王.jpg" alt=""
-                 style="width: 100%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
+          <el-col :span="4" style="margin-top: 30px" v-for="item in goodsData">
+            <img :src="item.img" alt=""
+                 style="width: 90%; height: 180px; border-radius: 10px; border: 1px solid #cccccc">
             <div style="text-align: left; font-weight: 530; font-size: 16px; margin-top: 10px" class="overflowShow">
-              阳光玫瑰
+              {{ item.name }}
             </div>
             <div style="margin-top: 10px">
-              <span style="color: red; margin-right: 30px">￥ 15</span>
+              <span style="color: red; margin-right: 30px">{{ item.price }}</span>
               <el-button type="warning" size="mini">购买</el-button>
             </div>
           </el-col>
@@ -106,7 +106,8 @@ export default {
       activeName: 'first',
       informationData: [],
       policyData: [],
-      agritainmentData: []
+      agritainmentData: [],
+      goodsData: []
     }
   },
 
@@ -115,6 +116,7 @@ export default {
     this.loadInformation()
     this.loadPolicy()
     this.loadAgritainment()
+    this.loadGoods()
   },
   // methods：本页面所有的点击事件或者其他函数定义区
   methods: {
@@ -143,6 +145,15 @@ export default {
       this.$request.get('/agritainment/top6').then(res => {
         if (res.code === '200') {
           this.agritainmentData = res.data
+        } else {
+          this.message.error(res.msg)
+        }
+      })
+    },
+    loadGoods() {
+      this.$request.get('/goods/selectAll/').then(res => {
+        if (res.code === '200') {
+          this.goodsData = res.data
         } else {
           this.message.error(res.msg)
         }

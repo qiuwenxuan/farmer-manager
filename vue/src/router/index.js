@@ -61,6 +61,12 @@ const routes = [
                 meta: {name: '农家乐信息'},
                 component: () => import('../views/manager/Agritainment')
             },
+            {
+                path: 'goods',
+                name: 'Goods',
+                meta: {name: '扶贫商品'},
+                component: () => import('../views/manager/Goods')
+            },
         ]
     },
     {
