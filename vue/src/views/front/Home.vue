@@ -33,11 +33,12 @@
               </div>
             </el-tab-pane>
             <el-tab-pane label="扶贫政策" name="second">
-              <div style="display: flex; line-height: 48px; height: 48px">
-                <div style="flex: 1; font-size: 17px; width: 0; cursor: pointer" class="overflowShow">
-                  传承井冈山精神 带领村名过上好日子
+              <div style="display: flex; line-height: 48px; height: 48px" v-for="item in policyData">
+                <div style="flex: 1; font-size: 17px; width: 0; cursor: pointer" class="overflowShow"
+                     @click="navTo('/front/policyDetial?id='+item.id)">
+                  {{ item.name }}
                 </div>
-                <div style="width: 150px; text-align: right; color: #a9a9b8; font-size: 15px">2023-12-08</div>
+                <div style="width: 150px; text-align: right; color: #a9a9b8; font-size: 15px">{{ item.time }}</div>
               </div>
             </el-tab-pane>
           </el-tabs>
@@ -249,13 +250,15 @@ export default {
         require('@/assets/imgs/lun-3.png')
       ],
       activeName: 'first',
-      informationData: []
+      informationData: [],
+      policyData: []
     }
   },
 
   //mounted是钩子函数，当组件被加载到页面上后自动执行的函数，会调用loadInformation方法，自动将informatio表当中的前6个数据显示在扶贫资讯一栏
   mounted() {
     this.loadInformation()
+    this.loadPolicy()
   },
   // methods：本页面所有的点击事件或者其他函数定义区
   methods: {
@@ -264,6 +267,15 @@ export default {
       this.$request.get('/information/top6').then(res => {
         if (res.code === '200') {
           this.informationData = res.data
+        } else {
+          this.message.error(res.msg)
+        }
+      })
+    },
+    loadPolicy() {
+      this.$request.get('/policy/top6').then(res => {
+        if (res.code === '200') {
+          this.policyData = res.data
         } else {
           this.message.error(res.msg)
         }

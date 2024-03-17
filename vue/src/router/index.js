@@ -49,6 +49,12 @@ const routes = [
                 meta: {name: '扶贫资讯'},
                 component: () => import('../views/manager/Information')
             },
+            {
+                path: 'policy',
+                name: 'Policy',
+                meta: {name: '扶贫政策'},
+                component: () => import('../views/manager/Policy')
+            },
         ]
     },
     {
@@ -63,11 +69,17 @@ const routes = [
                 meta: {name: '个人信息'},
                 component: () => import('../views/front/Person')
             },
-        {
+            {
                 path: 'informationDetial',
                 name: 'InformationDetial',
                 meta: {name: '资讯详情'},
                 component: () => import('../views/front/InformationDetial')
+            },
+            {
+                path: 'policyDetial',
+                name: 'PolicyDetial',
+                meta: {name: '资讯详情'},
+                component: () => import('../views/front/PolicyDetial')
             },
         ]
     },
