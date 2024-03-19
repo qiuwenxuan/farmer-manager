@@ -16,7 +16,7 @@ public class Goods implements Serializable {
     // 商品价格
     private String price;
     // 商品数量
-    private String num;
+    private Integer num;
     // 商品销量
     private String sales;
     // 商品图片
@@ -46,11 +46,11 @@ public class Goods implements Serializable {
         this.price = price;
     }
 
-    public String getNum() {
+    public Integer getNum() {
         return num;
     }
 
-    public void setNum(String num) {
+    public void setNum(Integer num) {
         this.num = num;
     }
 

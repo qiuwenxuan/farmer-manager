@@ -87,7 +87,13 @@ public class UserService {
      * 根据ID查询
      */
     public User selectById(Integer id) {
-        return userMapper.selectById(id);
+        User user = userMapper.selectById(id);
+        // 端更新余额接口调用了selectById，需要重新传入一个Token
+        // 生成token
+        String tokenData = user.getId() + "-" + RoleEnum.ADMIN.name();
+        String token = TokenUtils.createToken(tokenData, user.getPassword());
+        user.setToken(token);
+        return user;
     }
 
     /**

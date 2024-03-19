@@ -95,7 +95,7 @@ public class FileController {
     }
 
     /**
-     * wang-editor编辑器文件上传接口
+     * wang-editor富文本编辑器文件上传接口
      */
     @PostMapping("/wang/upload")
     public Map<String, Object> wangEditorUpload(MultipartFile file) {

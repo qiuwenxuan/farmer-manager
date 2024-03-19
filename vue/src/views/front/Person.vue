@@ -114,10 +114,23 @@ export default {
       }
     }
   },
-  created() {
-
+  created() {  // 在组件实例被创建之后执行一些初始化逻辑
+    // 初始化更新个人中心信息
+    this.getPerson()
   },
   methods: {
+    // 更新user的数据
+    getPerson() {
+      this.$request.get('/user/selectById/' + this.user.id).then(res => {
+        if (res.code === '200') {
+          this.user = res.data
+          // 这里会出现一个问题：user获取到的data里面没有Token信息，当更新缓存之后前端页面没有Token会导致退出登录，因此我们需要在selectById接口给返回值user重新添加Token
+          localStorage.setItem("xm-user", JSON.stringify(this.user))
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
+    },
     // 充值
     recharge() {
       // 首先更新账户余额为原本的account+充值的account

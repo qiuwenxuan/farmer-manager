@@ -31,7 +31,7 @@ public class User extends Account implements Serializable {
     private String level;
 
     //余额
-    private String account;
+    private Double account;
 
     //头像
     private String avatar;
@@ -110,11 +110,11 @@ public class User extends Account implements Serializable {
         this.level = level;
     }
 
-    public String getAccount() {
+    public Double getAccount() {
         return account;
     }
 
-    public void setAccount(String acount) {
+    public void setAccount(Double acount) {
         this.account = acount;
     }
 

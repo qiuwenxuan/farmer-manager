@@ -69,8 +69,12 @@
               {{ item.name }}
             </div>
             <div style="margin-top: 10px">
-              <span style="color: red; margin-right: 30px">{{ item.price }}</span>
-              <el-button type="warning" size="mini">购买</el-button>
+              <span style="color: red; margin-right: 30px">￥ {{ item.price }}</span>
+              <span style="color: #666666; margin-right: 20px">库存：{{ item.num }}</span>
+            </div>
+            <div style="margin-top: 10px">
+              <!--              购买按钮，当助农产品库存为0时，不能点击购买disable-->
+              <el-button type="warning" size="mini" @click="buy(item)" :disabled="item.num === 0">购 买</el-button>
             </div>
           </el-col>
         </el-row>
@@ -93,6 +97,7 @@ export default {
 
   data() {
     return {
+      user: JSON.parse(localStorage.getItem('xm-user') || '{}'),
       carouselData: [
         require('@/assets/imgs/lun-1.png'),
         require('@/assets/imgs/lun-2.png'),
@@ -120,6 +125,27 @@ export default {
   },
   // methods：本页面所有的点击事件或者其他函数定义区
   methods: {
+    buy(goods) {
+      // 管理员不支持购买
+      if (this.user.role === 'ADMIN') {
+        this.$message.error('管理员不支持该操作')
+        return
+      }
+      let data = {
+        goodsId: goods.id,
+        userId: this.user.id,
+        price: goods.price,
+        status: '待发货'
+      }
+      this.$request.post('/orders/add', data).then(res => {
+        if (res.code === '200') {
+          this.$message.success('购买成功')
+          this.loadGoods()
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
+    },
     // 加载扶贫咨询表的前6个数据到扶贫咨询一栏
     loadInformation() {
       this.$request.get('/information/top6').then(res => {
