@@ -47,6 +47,7 @@
             <el-menu-item index="/policy">扶贫政策</el-menu-item>
             <el-menu-item index="/agritainment">农家乐信息</el-menu-item>
             <el-menu-item index="/goods">扶贫商品</el-menu-item>
+            <el-menu-item index="/orders">订单信息</el-menu-item>
           </el-submenu>
 
           <el-submenu index="user">

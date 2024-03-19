@@ -5,7 +5,7 @@
 <mapper namespace="com.example.mapper.OrdersMapper">
 
     <sql id="Base_Column_List">
-        id,goodsId,userId,orderId,time,price,status
+        id,goods_id,user_id,order_id,time,price,status
     </sql>
 
     <select id="selectAll" resultType="com.example.entity.Orders">
@@ -14,7 +14,9 @@
         from orders
         <where>
             <if test="id != null">and id= #{id}</if>
-            <if test="orderId != null">and order_id= #{orderId}</if>
+            <if test="orderId != null">and order_id = #{orderId}</if>
+            # 添加status方便前端状态下拉框查询
+            <if test="status != null">and status = #{status}</if>
         </where>
         order by id desc
     </select>

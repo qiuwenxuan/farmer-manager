@@ -67,6 +67,12 @@ const routes = [
                 meta: {name: '扶贫商品'},
                 component: () => import('../views/manager/Goods')
             },
+            {
+                path: 'orders',
+                name: 'Orders',
+                meta: {name: '订单信息'},
+                component: () => import('../views/manager/Orders')
+            },
         ]
     },
     {

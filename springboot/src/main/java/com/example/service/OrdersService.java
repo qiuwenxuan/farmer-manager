@@ -44,10 +44,10 @@ public class OrdersService {
         }
 //        根据唯一的下单时间戳当做orderId
         orders.setOrderId(DateUtil.format(new Date(), "yyyyMMddHHmmss"));
-        orders.setTime(DateUtil.today());
+        orders.setTime(DateUtil.now());
         ordersMapper.insert(orders);
 //        扣除用户余额
-        if(ObjectUtil.isNotEmpty(user.getAccount())){
+        if (ObjectUtil.isNotEmpty(user.getAccount())) {
             user.setAccount(user.getAccount() - orders.getPrice());
             userMapper.updateById(user);
         }
@@ -97,11 +97,27 @@ public class OrdersService {
     }
 
     /**
-     * 分页查询
+     * 分页查询,需要关联user表获取userName，关联goods表获取img和goodName
      */
     public PageInfo<Orders> selectPage(Orders orders, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<Orders> list = ordersMapper.selectAll(orders);
+        // 遍历集合当中的order对象
+        for (Orders dbOrders : list) {
+            // 通过goodsId获取goods对象
+            Goods goods = goodsMapper.selectById(dbOrders.getGoodsId());
+//            添加goods对象的img、GoodName到orders对象内
+            if (ObjectUtil.isNotEmpty(goods)) {
+                dbOrders.setGoodsName(goods.getName());
+                dbOrders.setImg(goods.getImg());
+            }
+//            通过userId获取user对象
+            User user = userMapper.selectById(dbOrders.getUserId());
+//            添加user的Name到order的下单用户UserName内
+            if (ObjectUtil.isNotEmpty(user)) {
+                dbOrders.setUserName(user.getName());
+            }
+        }
         return PageInfo.of(list);
     }
 
